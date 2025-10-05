@@ -1,0 +1,130 @@
+main {
+  height: 100vh;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
+main .left,
+main .right {
+  flex: 1;
+  border-radius: 0.7rem;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+main .left {
+  background-color: #3d3c3c;
+  position: relative;
+}
+
+.left .code {
+  flex: 1;
+  background-color: #1e1e1e;
+  border-radius: 0.5rem;
+  overflow: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  background-color: #2a2a2a;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.dots {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.red,
+.yellow,
+.green {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.red {
+  background-color: #ff5f56;
+}
+
+.yellow {
+  background-color: #ffbd2e;
+}
+
+.green {
+  background-color: #27c93f;
+}
+
+.file-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.filename {
+  color: #ffffffcc;
+  font-size: 0.9rem;
+  font-family: 'Fira Code', monospace;
+}
+
+.language-dropdown {
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.4rem;
+  border: none;
+  background-color: #444;
+  color: #fff;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.editor-wrapper {
+  flex: 1;
+  padding: 1rem;
+  overflow: auto;
+  font-family: 'Fira Code', monospace;
+}
+
+.code,
+.code pre,
+.code pre code {
+  background-color: #1e1e1e !important;
+  color: #ffffff !important;
+}
+
+main .left .review {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: rgb(164, 164, 237);
+  color: #101010;
+  padding: 0.3rem 1.7rem;
+  border-radius: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+main .right {
+  background-color: #3a3a3a;
+}
+
+.editor-wrapper *:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
