@@ -12,10 +12,15 @@
   "description": "",
   "dependencies": {
     "@google/genai": "^1.7.0",
-    "cors": "^2.8.5",
+    "@mistralai/mistralai": "^2.2.0",
+    "@supabase/supabase-js": "^2.103.2",
+    "connect-pg-simple": "^10.0.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.0.0",
     "express": "^5.1.0",
-    "mongodb": "^6.17.0",
-    "mongoose": "^8.16.2"
+    "express-session": "^1.19.0",
+    "groq-sdk": "^1.1.2",
+    "helmet": "^8.1.0",
+    "parse-diff": "^0.11.1"
   }
 }
