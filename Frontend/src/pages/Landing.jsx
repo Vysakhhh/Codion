@@ -2,269 +2,204 @@ import { Link } from 'react-router-dom';
 
 export default function Landing() {
   return (
-    <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: '#fff', color: '#0a0a0a', WebkitFontSmoothing: 'antialiased' }}>
+    <>
       <style>{`
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        a { text-decoration: none; color: inherit; }
-        :root {
-          --black: #0a0a0a;
-          --white: #ffffff;
-          --g50: #fafafa;
-          --g100: #f5f5f5;
-          --g200: #e5e5e5;
-          --g300: #d4d4d4;
-          --g500: #737373;
-          --g700: #404040;
-          --mono: 'SF Mono', 'Fira Code', monospace;
-        }
-        body { font-size: 15px; line-height: 1.5; }
+        .codion-wrap { font-family: 'Inter', system-ui, sans-serif; background: #0a0a0a; color: #ededed; min-height: 100vh; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.5; position: relative; }
+        .codion-wrap * { box-sizing: border-box; margin: 0; padding: 0; }
+        .codion-wrap a { text-decoration: none; color: inherit; }
 
-        /* NAV */
-        nav {
-          position: fixed; top: 0; left: 0; right: 0; z-index: 99;
-          height: 52px; display: flex; align-items: center; justify-content: space-between;
-          padding: 0 32px;
-          border-bottom: 1px solid var(--g200);
-          background: rgba(255,255,255,0.9);
-          backdrop-filter: blur(8px);
-        }
-        .logo { font-size: 14px; font-weight: 500; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
-        .logo-sq { width: 20px; height: 20px; background: var(--black); border-radius: 4px; }
-        .nav-mid { display: flex; gap: 28px; }
-        .nav-mid a { font-size: 13px; color: var(--g500); transition: color .12s; }
-        .nav-mid a:hover { color: var(--black); }
-        .nav-right { display: flex; align-items: center; gap: 16px; }
-        .n-sign { font-size: 13px; color: var(--g700); }
-        .n-btn {
-          font-size: 13px; font-family: inherit; font-weight: 500;
-          background: var(--black); color: #fff;
-          border: none; border-radius: 6px; padding: 6px 14px; cursor: pointer;
-        }
+        .c-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 48px 48px; }
+        .c-grid-fade { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(10,10,10,0) 0%, #0a0a0a 70%); }
 
-        /* LAYOUT */
-        .page { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+        .c-nav { position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; height: 48px; border-bottom: 1px solid rgba(255,255,255,0.07); background: rgba(10,10,10,0.85); backdrop-filter: blur(12px); }
+        .c-logo { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: -0.01em; }
+        .c-logo-icon { width: 22px; height: 22px; border-radius: 5px; background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .c-nav-links { display: flex; gap: 24px; }
+        .c-nav-links a { font-size: 13px; color: rgba(255,255,255,0.45); transition: color .1s; }
+        .c-nav-links a:hover { color: #fff; }
+        .c-nav-r { display: flex; align-items: center; gap: 14px; }
+        .c-nav-r a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color .1s; }
+        .c-nav-r a:hover { color: #fff; }
+        .c-btn-w { font-size: 12px; font-family: inherit; font-weight: 500; background: #fff; color: #0a0a0a; border: none; border-radius: 5px; padding: 6px 13px; cursor: pointer; }
+        .c-btn-w:hover { background: #e5e5e5; }
 
-        /* HERO */
-        .hero { padding: 120px 0 72px; border-bottom: 1px solid var(--g200); }
-        .eyebrow {
-          display: inline-block; font-size: 12px; font-weight: 500;
-          color: var(--g500); letter-spacing: 0.04em;
-          border: 1px solid var(--g200); border-radius: 99px;
-          padding: 3px 10px; margin-bottom: 28px;
-        }
-        h1 {
-          font-size: clamp(32px, 5vw, 48px); font-weight: 500;
-          line-height: 1.1; letter-spacing: -0.035em;
-          margin-bottom: 18px;
-        }
-        h1 em { font-style: normal; color: var(--g500); }
-        .sub { font-size: 15px; color: var(--g500); line-height: 1.65; max-width: 420px; margin-bottom: 32px; }
-        .cta-row { display: flex; align-items: center; gap: 12px; }
-        .btn-dark {
-          font-size: 13px; font-family: inherit; font-weight: 500;
-          background: var(--black); color: #fff;
-          border: none; border-radius: 7px; padding: 9px 18px; cursor: pointer;
-          display: inline-flex; align-items: center; gap: 6px;
-        }
-        .btn-light {
-          font-size: 13px; font-family: inherit; color: var(--g500);
-          background: none; border: 1px solid var(--g200);
-          border-radius: 7px; padding: 9px 18px; cursor: pointer;
-          transition: border-color .12s, color .12s;
-        }
-        .btn-light:hover { border-color: var(--g300); color: var(--black); }
-        .stats-row { display: flex; gap: 40px; padding-top: 40px; margin-top: 40px; border-top: 1px solid var(--g200); }
-        .stat-n { font-size: 20px; font-weight: 500; letter-spacing: -0.02em; }
-        .stat-l { font-size: 12px; color: var(--g500); margin-top: 2px; }
+        .c-page { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 28px; }
 
-        /* CODE */
-        .code-sec { padding: 56px 0; border-bottom: 1px solid var(--g200); }
-        .win { border: 1px solid var(--g200); border-radius: 8px; overflow: hidden; background: var(--g50); }
-        .win-bar {
-          display: flex; align-items: center; gap: 6px;
-          padding: 10px 14px; border-bottom: 1px solid var(--g200); background: #fff;
-        }
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .fn { margin-left: auto; font-size: 11px; font-family: var(--mono); color: var(--g500); }
-        .win-code {
-          padding: 20px; font-family: var(--mono); font-size: 12.5px;
-          line-height: 1.75; color: var(--g700); overflow-x: auto;
-          white-space: pre;
-        }
-        .cm { color: var(--g300); }
-        .kw { color: var(--black); font-weight: 500; }
-        .str { color: var(--g500); }
-        .flag {
-          margin-top: 12px; display: flex; align-items: flex-start; gap: 10px;
-          padding: 12px 14px; border: 1px solid #fecaca; border-radius: 7px; background: #fff5f5;
-        }
-        .flag-dot { width: 6px; height: 6px; border-radius: 50%; background: #ef4444; margin-top: 5px; flex-shrink: 0; }
-        .flag-title { font-size: 11px; font-weight: 500; color: #dc2626; letter-spacing: 0.04em; text-transform: uppercase; }
-        .flag-body { font-size: 13px; color: var(--g700); margin-top: 2px; }
+        /* CONSISTENT SECTION SPACING — every section gets exactly 40px top/bottom */
+        .c-section { padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+        .c-section:last-child { border-bottom: none; }
 
-        /* FEATURES */
-        .feat { padding: 56px 0; border-bottom: 1px solid var(--g200); }
-        .sec-label { font-size: 11px; font-weight: 500; color: var(--g500); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 32px; }
-        .feat-row {
-          display: flex; justify-content: space-between; align-items: baseline;
-          padding: 16px 0; border-bottom: 1px solid var(--g200);
-        }
-        .feat-row:last-child { border-bottom: none; }
-        .feat-name { font-size: 14px; font-weight: 500; }
-        .feat-desc { font-size: 13px; color: var(--g500); max-width: 280px; text-align: right; line-height: 1.5; }
+        .c-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; padding: 3px 10px; margin-bottom: 20px; letter-spacing: 0.02em; }
+        .c-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; }
+        .c-h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 600; letter-spacing: -0.04em; line-height: 1.05; color: #fff; margin-bottom: 14px; }
+        .c-h1 span { color: rgba(255,255,255,0.25); }
+        .c-sub { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 400px; margin-bottom: 24px; }
+        .c-btns { display: flex; align-items: center; gap: 10px; }
+        .c-btn-solid { font-size: 13px; font-family: inherit; font-weight: 500; background: #fff; color: #0a0a0a; border: none; border-radius: 6px; padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; }
+        .c-btn-solid:hover { background: #e5e5e5; }
+        .c-btn-ghost { font-size: 13px; font-family: inherit; color: rgba(255,255,255,0.45); background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 16px; cursor: pointer; }
+        .c-btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
 
-        /* LOGOS */
-        .logos { padding: 32px 0; border-bottom: 1px solid var(--g200); }
-        .logos-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-        .logos-row span { font-size: 13px; font-weight: 500; color: var(--g300); letter-spacing: -0.01em; transition: color .12s; cursor: default; }
-        .logos-row span:hover { color: var(--g700); }
+        .c-metrics { display: flex; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.07); }
+        .c-m { flex: 1; }
+        .c-m + .c-m { padding-left: 28px; border-left: 1px solid rgba(255,255,255,0.07); }
+        .c-m-n { font-size: 20px; font-weight: 600; letter-spacing: -0.03em; color: #fff; }
+        .c-m-l { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 2px; }
 
-        /* CTA */
-        .cta-sec { padding: 80px 0; text-align: center; }
-        h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 500; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 14px; }
-        .cta-sub { font-size: 14px; color: var(--g500); margin-bottom: 28px; }
+        .c-win { border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; background: #111; }
+        .c-win-top { display: flex; align-items: center; gap: 7px; padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+        .c-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .c-win-file { margin-left: auto; font-size: 11px; font-family: 'SF Mono','Fira Code',monospace; color: rgba(255,255,255,0.25); }
+        .c-code { padding: 18px 20px; font-family: 'SF Mono','Fira Code',monospace; font-size: 12px; line-height: 1.8; color: rgba(255,255,255,0.4); white-space: pre; overflow-x: auto; }
+        .c-cm { color: rgba(255,255,255,0.18); }
+        .c-kw { color: #fff; }
+        .c-str { color: rgba(255,255,255,0.45); }
+        .c-fn { color: rgba(255,255,255,0.6); }
 
-        /* FOOTER */
-        footer {
-          padding: 28px 24px; border-top: 1px solid var(--g200);
-          display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-          max-width: 640px; margin: 0 auto;
-        }
-        .f-logo { font-size: 13px; font-weight: 500; }
-        .f-copy { font-size: 12px; color: var(--g500); }
-        .f-links { display: flex; gap: 20px; }
-        .f-links a { font-size: 12px; color: var(--g500); transition: color .12s; }
-        .f-links a:hover { color: var(--black); }
+        .c-alert { margin-top: 10px; display: flex; gap: 10px; align-items: flex-start; padding: 11px 14px; border: 1px solid rgba(239,68,68,0.25); border-radius: 6px; background: rgba(239,68,68,0.05); }
+        .c-al-line { width: 2px; background: #ef4444; border-radius: 2px; align-self: stretch; flex-shrink: 0; }
+        .c-al-tag { font-size: 10px; font-weight: 600; color: #ef4444; letter-spacing: 0.06em; text-transform: uppercase; }
+        .c-al-msg { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+        .c-s-label { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; }
+        .c-feat-item { display: flex; justify-content: space-between; align-items: baseline; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .c-feat-item:last-child { border: none; }
+        .c-fi-name { font-size: 13px; font-weight: 500; color: #fff; }
+        .c-fi-desc { font-size: 12px; color: rgba(255,255,255,0.3); max-width: 260px; text-align: right; line-height: 1.5; }
+
+        .c-logos-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+        .c-logos-row span { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.15); cursor: default; transition: color .1s; }
+        .c-logos-row span:hover { color: rgba(255,255,255,0.4); }
+
+        .c-h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 600; letter-spacing: -0.035em; color: #fff; margin-bottom: 10px; }
+        .c-cta-p { font-size: 13px; color: rgba(255,255,255,0.3); margin-bottom: 20px; line-height: 1.6; }
+
+        .c-footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 20px 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+        .c-f-name { font-size: 12px; font-weight: 600; color: #fff; }
+        .c-f-copy { font-size: 11px; color: rgba(255,255,255,0.2); }
+        .c-f-links { display: flex; gap: 18px; }
+        .c-f-links a { font-size: 11px; color: rgba(255,255,255,0.25); transition: color .1s; }
+        .c-f-links a:hover { color: #fff; }
       `}</style>
 
-      {/* NAV */}
-      <nav>
-        <div className="logo"><div className="logo-sq" />Codion</div>
-        <div className="nav-mid">
-          <a href="#features">Platform</a>
-          <a href="#demo">Docs</a>
-          <a href="#pricing">Pricing</a>
-        </div>
-        <div className="nav-right">
-          <Link to="/login" className="n-sign">Sign in</Link>
-          <Link to="/login"><button className="n-btn">Get started</button></Link>
-        </div>
-      </nav>
+      <div className="codion-wrap">
+        <div className="c-grid" />
+        <div className="c-grid-fade" />
 
-      <div className="page">
+        <nav className="c-nav">
+          <div className="c-logo">
+            <div className="c-logo-icon">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <path d="M1.5 11L6.5 1.5L11.5 11" stroke="#0a0a0a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3.5 7.5H9.5" stroke="#0a0a0a" strokeWidth="1.8" strokeLinecap="round"/>
+              </svg>
+            </div>
+            Codion
+          </div>
+          <div className="c-nav-links">
+            <a href="#features">Platform</a>
+            <a href="#">Docs</a>
+            <a href="#">Pricing</a>
+          </div>
+          <div className="c-nav-r">
+            <Link to="/login">Sign in</Link>
+            <Link to="/login"><button className="c-btn-w">Get started</button></Link>
+          </div>
+        </nav>
 
-        {/* HERO */}
-        <section className="hero">
-          <div className="eyebrow">Now in public beta</div>
-          <h1>Review code.<br /><em>Not each other's time.</em></h1>
-          <p className="sub">
-            Automated PR reviews powered by Groq, Gemini, and Mistral.
-            Catches bugs and security issues before they reach production.
-          </p>
-          <div className="cta-row">
+        <div className="c-page">
+
+          {/* HERO */}
+          <section className="c-section" style={{ paddingTop: 64 }}>
+            <div className="c-badge"><span className="c-badge-dot" />Public beta — V2.5</div>
+            <h1 className="c-h1">Review code.<br /><span>Not each other's time.</span></h1>
+            <p className="c-sub">Automated PR reviews using Groq, Gemini, and Mistral. Catches bugs and security flaws before they ship.</p>
+            <div className="c-btns">
+              <Link to="/login">
+                <button className="c-btn-solid">
+                  Start reviewing
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6H10M7 3L10 6L7 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </button>
+              </Link>
+              <button className="c-btn-ghost">View demo</button>
+            </div>
+            <div className="c-metrics">
+              <div className="c-m"><div className="c-m-n">1.2M+</div><div className="c-m-l">Lines analyzed</div></div>
+              <div className="c-m"><div className="c-m-n">45k</div><div className="c-m-l">Bugs caught</div></div>
+              <div className="c-m"><div className="c-m-n">8k+</div><div className="c-m-l">Developers</div></div>
+            </div>
+          </section>
+
+          {/* CODE */}
+          <section className="c-section">
+            <div className="c-win">
+              <div className="c-win-top">
+                <div className="c-dot" style={{ background: '#ff5f57' }} />
+                <div className="c-dot" style={{ background: '#febc2e' }} />
+                <div className="c-dot" style={{ background: '#28c840' }} />
+                <span className="c-win-file">auth.js</span>
+              </div>
+              <div className="c-code">
+                <span className="c-cm">{'// vulnerable — string interpolation\n'}</span>
+                <span className="c-kw">const</span>{' user = '}<span className="c-kw">await</span>{' db.'}<span className="c-fn">query</span>{'(\n  '}<span className="c-str">{'`SELECT * FROM users WHERE id = ${userId}`'}</span>{'\n);\n\n'}
+                <span className="c-cm">{'// fixed — parameterized query\n'}</span>
+                <span className="c-kw">const</span>{' user = '}<span className="c-kw">await</span>{' db.'}<span className="c-fn">query</span>{'(\n  '}<span className="c-str">{"'SELECT * FROM users WHERE id = $1'"}</span>{',\n  [userId]\n);'}
+              </div>
+            </div>
+            <div className="c-alert">
+              <div className="c-al-line" />
+              <div>
+                <div className="c-al-tag">Security · High</div>
+                <div className="c-al-msg">SQL injection via unsanitized interpolation. Replace with a parameterized query.</div>
+              </div>
+            </div>
+          </section>
+
+          {/* FEATURES */}
+          <section className="c-section" id="features">
+            <div className="c-s-label">Capabilities</div>
+            {[
+              ['Security scanning', 'Injections, exposed secrets, auth bypasses — every push.'],
+              ['Triple-model validation', 'Groq, Gemini and Mistral cross-check each finding.'],
+              ['Sub-second review', 'Results before your reviewer opens the PR.'],
+              ['Refactor suggestions', 'Readability and modern patterns, not just bugs.'],
+            ].map(([n, d]) => (
+              <div className="c-feat-item" key={n}>
+                <span className="c-fi-name">{n}</span>
+                <span className="c-fi-desc">{d}</span>
+              </div>
+            ))}
+          </section>
+
+          {/* LOGOS */}
+          <section className="c-section">
+            <div className="c-logos-row">
+              {['GitHub', 'GitLab', 'Vercel', 'Nvidia', 'Groq'].map(l => <span key={l}>{l}</span>)}
+            </div>
+          </section>
+
+          {/* CTA */}
+          <section className="c-section" style={{ textAlign: 'center', borderBottom: 'none' }}>
+            <h2 className="c-h2">Ship with confidence.</h2>
+            <p className="c-cta-p">Free for open source. Connect your repo and get your first review in under a minute.</p>
             <Link to="/login">
-              <button className="btn-dark">
-                Start reviewing
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                  <path d="M2.5 6.5H10.5M7.5 3.5L10.5 6.5L7.5 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+              <button className="c-btn-solid" style={{ margin: '0 auto' }}>
+                Connect your repo
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6H10M7 3L10 6L7 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </button>
             </Link>
-            <button className="btn-light">View demo</button>
-          </div>
-          <div className="stats-row">
-            <div><div className="stat-n">1.2M+</div><div className="stat-l">Lines analyzed</div></div>
-            <div><div className="stat-n">45k</div><div className="stat-l">Bugs caught</div></div>
-            <div><div className="stat-n">8k+</div><div className="stat-l">Developers</div></div>
-          </div>
-        </section>
+          </section>
 
-        {/* CODE PREVIEW */}
-        <section className="code-sec">
-          <div className="win">
-            <div className="win-bar">
-              <div className="dot" style={{ background: '#ff5f57' }} />
-              <div className="dot" style={{ background: '#febc2e' }} />
-              <div className="dot" style={{ background: '#28c840' }} />
-              <span className="fn">auth.js</span>
-            </div>
-            <div className="win-code">
-              <span className="cm">{'// vulnerable — string interpolation\n'}</span>
-              <span className="kw">const </span>
-              {'user = '}
-              <span className="kw">await </span>
-              {'db.query(\n  '}
-              <span className="str">{'`SELECT * FROM users WHERE id = ${userId}`'}</span>
-              {'\n);\n\n'}
-              <span className="cm">{'// fixed — parameterized query\n'}</span>
-              <span className="kw">const </span>
-              {'user = '}
-              <span className="kw">await </span>
-              {'db.query(\n  '}
-              <span className="str">{"'SELECT * FROM users WHERE id = $1'"}</span>
-              {',\n  [userId]\n);'}
-            </div>
-          </div>
-          <div className="flag">
-            <div className="flag-dot" />
-            <div>
-              <div className="flag-title">Security · High</div>
-              <div className="flag-body">SQL injection via unsanitized interpolation. Use parameterized queries.</div>
-            </div>
-          </div>
-        </section>
-
-        {/* FEATURES */}
-        <section className="feat" id="features">
-          <div className="sec-label">What it does</div>
-          {[
-            ['Security scanning', 'Injections, exposed secrets, and auth bypasses on every push.'],
-            ['Triple-model validation', 'Groq, Gemini, and Mistral cross-check to cut false positives.'],
-            ['Sub-second review', 'Results before your reviewer opens the PR.'],
-            ['Refactor suggestions', 'Readability wins and outdated patterns, not just bugs.'],
-          ].map(([name, desc]) => (
-            <div className="feat-row" key={name}>
-              <div className="feat-name">{name}</div>
-              <div className="feat-desc">{desc}</div>
-            </div>
-          ))}
-        </section>
-
-        {/* LOGOS */}
-        <section className="logos">
-          <div className="logos-row">
-            {['GitHub', 'GitLab', 'Vercel', 'Nvidia', 'Groq'].map(l => (
-              <span key={l}>{l}</span>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="cta-sec">
-          <h2>Ship with confidence.</h2>
-          <p className="cta-sub">Free for open source. Connect your repo and get your first review in under a minute.</p>
-          <Link to="/login">
-            <button className="btn-dark" style={{ margin: '0 auto' }}>
-              Connect your repo
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M2.5 6.5H10.5M7.5 3.5L10.5 6.5L7.5 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </Link>
-        </section>
-
-      </div>
-
-      {/* FOOTER */}
-      <footer>
-        <div className="f-logo">Codion</div>
-        <span className="f-copy">© 2025 Codion Technologies</span>
-        <div className="f-links">
-          <a href="#">Twitter</a>
-          <a href="#">Discord</a>
-          <a href="#">GitHub</a>
         </div>
-      </footer>
-    </div>
+
+        <footer className="c-footer">
+          <div className="c-f-name">Codion</div>
+          <span className="c-f-copy">© 2025 Codion Technologies</span>
+          <div className="c-f-links">
+            <a href="#">Twitter</a><a href="#">Discord</a><a href="#">GitHub</a>
+          </div>
+        </footer>
+      </div>
+    </>
   );
 }
