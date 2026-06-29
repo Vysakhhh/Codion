@@ -1,3 +1,4 @@
+import { minimatch } from 'minimatch';
 import { DiffParser } from './diffParser.js';
 import { ContextBuilder } from './contextBuilder.js';
 import { LLMRouter } from '../llm/router.js';
@@ -24,8 +25,41 @@ export class ReviewEngine {
       throw new Error('No files found in the provided diff.');
     }
 
+    // Filter ignored files from settings.ignoredPatterns
+    let filesToReview = parsedFiles;
+    if (settings && settings.ignoredPatterns && Array.isArray(settings.ignoredPatterns)) {
+      filesToReview = parsedFiles.filter(file => {
+        const filePath = file.to || file.from;
+        if (!filePath) return true;
+        
+        const isIgnored = settings.ignoredPatterns.some(pattern => {
+          try {
+            return minimatch(filePath, pattern, { dot: true, matchBase: true });
+          } catch (e) {
+            console.error(`[ReviewEngine] Error matching pattern ${pattern}:`, e.message);
+            return false;
+          }
+        });
+        
+        if (isIgnored) {
+          console.log(`[ReviewEngine] Ignoring file: ${filePath}`);
+        }
+        return !isIgnored;
+      });
+    }
+
+    if (filesToReview.length === 0) {
+      return {
+        totalScore: 100,
+        filesReviewed: 0,
+        fileResults: [],
+        summary: 'All changed files were ignored based on your configuration patterns.',
+        timestamp: new Date().toISOString()
+      };
+    }
+
     // 3. Process files in parallel
-    const reviewPromises = parsedFiles.map(async (file) => {
+    const reviewPromises = filesToReview.map(async (file) => {
       try {
         const packet = ContextBuilder.build(file, metadata, settings);
         const result = await this.router.review(packet);

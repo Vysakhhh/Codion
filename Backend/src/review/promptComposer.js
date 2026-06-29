@@ -31,7 +31,7 @@ RULES:
   }
 
   static getUserPrompt(packet) {
-    return `PR: ${packet.prTitle}
+    let prompt = `PR: ${packet.prTitle}
 DESC: ${packet.prDescription}
 FILE: ${packet.filePath} (${packet.language})
 
@@ -42,5 +42,12 @@ CONTEXT:
 ${packet.context}
 
 Settings: maxComments=${packet.settings.maxComments}, suppressInfo=${packet.settings.suppressInfo}`;
+
+    if (packet.jsonRetrySuffix) {
+      prompt += `\n\n${packet.jsonRetrySuffix}`;
+    }
+    
+    return prompt;
   }
 }
+

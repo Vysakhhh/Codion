@@ -6,7 +6,6 @@ export default class GeminiProvider extends ILLMProvider {
   constructor(apiKey) {
     super();
     this.client = new GoogleGenAI({ apiKey });
-    this.model = this.client.getGenerativeModel({ model: "gemini-2.5-flash" });
   }
 
   async review(packet) {
@@ -14,9 +13,10 @@ export default class GeminiProvider extends ILLMProvider {
     const userPrompt = PromptComposer.getUserPrompt(packet);
 
     try {
-      const result = await this.model.generateContent({
-        contents: [{ role: "user", parts: [{ text: `${systemPrompt}\n\n${userPrompt}` }] }],
-        generationConfig: {
+      const result = await this.client.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: `${systemPrompt}\n\n${userPrompt}`,
+        config: {
           temperature: 0.1,
           topP: 0.95,
           topK: 40,
@@ -25,8 +25,7 @@ export default class GeminiProvider extends ILLMProvider {
         },
       });
 
-      const response = await result.response;
-      return JSON.parse(response.text());
+      return JSON.parse(result.text);
     } catch (error) {
       console.error('Gemini Execution Failed:', error.message);
       throw error;

@@ -7,15 +7,22 @@ import Dashboard from './pages/Dashboard';
 import ReviewDetail from './pages/ReviewDetail';
 import UploadPage from './pages/UploadPage';
 import SettingsPage from './pages/SettingsPage';
+import Repositories from './pages/Repositories';
 import Login from './pages/Login';
 
 function AppShell() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
-    <div className="flex h-screen bg-gray-950 text-gray-100 font-sans">
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <div className="flex-1 flex flex-col overflow-hidden">
+    <div className="flex h-screen bg-white dark:bg-black text-black dark:text-[#ededed] font-sans overflow-hidden">
+      <Sidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
+      />
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         <Topbar onMenuClick={() => setSidebarOpen(true)} />
         <main className="flex-1 overflow-auto">
           <Outlet />
@@ -37,6 +44,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/review/:id" element={<ReviewDetail />} />
         <Route path="/reviews" element={<Dashboard />} />
+        <Route path="/repositories" element={<Repositories />} />
         <Route path="/upload" element={<UploadPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Route>
